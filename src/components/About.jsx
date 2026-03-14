@@ -10,8 +10,6 @@ import {
 } from "react-icons/fa";
 import { useMyContext } from "../Context/MyContext";
 
-
-
 const servicesData = [
   {
     icon: FaTruck,
@@ -56,7 +54,7 @@ const { comments } = useMyContext();
       {/* Title Section */}
       <div className="mb-12 text-center">
         <h2 className="text-4xl font-extrabold text-gray-800 mb-4 tracking-tight">
-          About B-10 Eatery
+          About Momma Choji’s CHOP 'N' CHILL 
         </h2>
         <p className="text-sm text-gray-500">
           Home &gt; <span className="text-red-500  font-bold">About Us</span>
@@ -69,7 +67,7 @@ const { comments } = useMyContext();
         <div>
           <img
             src="/images/img1.jpg"
-            alt="About B-10 Eatery"
+            alt="About Momma Choji’s CHOP 'N' CHILL "
             className="w-full h-auto rounded-lg shadow-lg object-cover"
           />
         </div>
@@ -77,10 +75,10 @@ const { comments } = useMyContext();
         {/* Description */}
         <div>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            <strong className="text-red-500">B-10 Eatery</strong> is more than just a food spot — we’re your neighborhood flavor hub! From sizzling hot take-outs to cozy dine-ins and smooth deliveries, our kitchen crafts every meal with love and taste that lingers.
+            <strong className="text-red-500">Momma Choji’s CHOP 'N' CHILL </strong> is more than just a food spot — we’re your neighborhood flavor hub! From sizzling hot take-outs to cozy dine-ins and smooth deliveries, our kitchen crafts every meal with love and taste that lingers.
           </p>
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            Whether you’re looking for traditional Nigerian dishes or continental delights, our team is committed to giving you a mouthwatering experience with each bite. At B-10 Eatery, we don’t just serve meals — we serve moments.
+            Whether you’re looking for traditional Nigerian dishes or continental delights, our team is committed to giving you a mouthwatering experience with each bite. At Momma Choji’s CHOP 'N' CHILL , we don’t just serve meals — we serve moments.
           </p>
           <p className="text-lg text-red-600 font-semibold italic">
             ...where your belly knows the best.

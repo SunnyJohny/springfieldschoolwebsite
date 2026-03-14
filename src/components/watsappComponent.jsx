@@ -6,7 +6,7 @@ const WhatsAppIcon = ({ messageCount = 1 }) => {
     <div className="fixed bottom-4 right-4 z-50">
       <div className="relative">
         <a
-          href="https://wa.me/2348038652949" // Replace with your WhatsApp number
+          href="https://wa.me/2348033353059" // Replace with your WhatsApp number
           target="_blank"
           rel="noopener noreferrer"
           className="bg-green-500 text-white w-12 h-12 sm:w-8 sm:h-8 flex items-center justify-center rounded-full shadow-lg hover:bg-green-600 transition-transform transform hover:scale-105"

@@ -20,3 +20,5 @@ const app = initializeApp(firebaseConfig);
 // ✅ Initialize and export services
 export const db = getFirestore(app);
 export const storage = getStorage(app); // ✅ Fix: now exported properly
+
+

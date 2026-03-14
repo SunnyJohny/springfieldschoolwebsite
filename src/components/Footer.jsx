@@ -1,101 +1,147 @@
+// src/components/Footer.jsx
 import React from "react";
-import {
-  FaYoutube,
-  FaWhatsapp,
-  FaFacebook,
-  FaLinkedin,
-  FaTiktok,
-} from "react-icons/fa";
-
-const socialMediaLinks = [
-  { name: "YouTube", icon: <FaYoutube />, url: "#" },
-  { name: "WhatsApp", icon: <FaWhatsapp />, url: "https://wa.me/+2348038652949" },
-  { name: "Facebook", icon: <FaFacebook />, url: "https://www.facebook.com/share/16hswFzy7r/" },
-  { name: "LinkedIn", icon: <FaLinkedin />, url: "#" },
-  { name: "TikTok", icon: <FaTiktok />, url: "https://www.facebook.com/share/1D7oL6bTGc/" },
-];
+import { Link as ScrollLink } from "react-scroll";
+import { FaFacebookF, FaWhatsapp, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 
 const quickLinks = [
-  { link: "Home", path: "home" },
-  { link: "About", path: "about" },
-  { link: "Services", path: "services" },
-  { link: "Dishes", path: "dishes" },
-  { link: "Contact", path: "contact" },
+  { label: "Home", to: "home" },
+  { label: "News", to: "news" },
+  { label: "Gallery", to: "gallery" },
+  { label: "Academics", to: "academics" },
+  { label: "About Us", to: "about" },
+  { label: "FAQs", to: "faqs" },
+  { label: "Contact", to: "contact" },
 ];
-
-const handleScrollAdjust = (e, path) => {
-  e.preventDefault();
-  const target = document.getElementById(path);
-
-  if (target) {
-    const offset = 100;
-    const elementPosition = target.offsetTop - offset;
-
-    window.scrollTo({
-      top: elementPosition,
-      behavior: "smooth",
-    });
-  }
-};
 
 const Footer = () => {
   return (
-    <footer className="bg-[#181818] text-white py-8 px-4">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Contact Information */}
+    <footer className="bg-blue-950 text-white">
+      <div className="border-t-4 border-yellow-400" />
+
+      <div className="max-w-6xl mx-auto px-4 py-14">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h2 className="text-xl font-bold mb-4">Contact Us</h2>
-            <p>Email: B10etery@gmail.com</p>
-            <p>Phone: +2348038652949</p>
-            <p>Address: No1 Ecwa Church Street Jenta Mangoro Jos, Plateau State.</p>
+            <p className="text-xs uppercase tracking-[0.28em] text-yellow-300 font-semibold">
+              Springfield
+            </p>
+            <h3 className="mt-3 text-2xl font-extrabold leading-snug text-white">
+              Golden Tulip Academy
+            </h3>
+            <p className="mt-4 text-sm leading-7 text-white/80">
+              Raising learners in a safe, inspiring, and disciplined
+              environment.
+            </p>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h2 className="text-xl font-bold mb-4">Quick Links</h2>
-            <ul className="space-y-2">
-              {quickLinks.map(({ link, path }) => (
-                <li key={path}>
-                  <a
-                    href={`#${path}`}
-                    onClick={(e) => handleScrollAdjust(e, path)}
-                    className="text-gray-400 hover:text-white transition-colors cursor-pointer"
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social Media */}
-          <div>
-            <h2 className="text-xl font-bold mb-4">Follow Us</h2>
-            <div className="flex space-x-4">
-              {socialMediaLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-gray-400 transition-colors text-xl"
+            <h4 className="text-sm font-extrabold uppercase tracking-[0.2em] text-yellow-300">
+              Quick Links
+            </h4>
+            <div className="mt-5 flex flex-col gap-3">
+              {quickLinks.map((item) => (
+                <ScrollLink
+                  key={item.label}
+                  to={item.to}
+                  spy={true}
+                  smooth={true}
+                  offset={-120}
+                  duration={500}
+                  className="cursor-pointer text-sm text-white/80 hover:text-yellow-300 transition"
                 >
-                  {social.icon}
-                </a>
+                  {item.label}
+                </ScrollLink>
               ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-extrabold uppercase tracking-[0.2em] text-yellow-300">
+              Contact
+            </h4>
+            <div className="mt-5 space-y-4 text-sm text-white/80 leading-7">
+              <p>
+                Yakubu Gowon Way
+                <br />
+                (off NTA Headquarters),
+                <br />
+                Jos, Plateau State.
+              </p>
+
+              <a
+                href="tel:+2348033353059"
+                className="flex items-center gap-3 hover:text-yellow-300 transition"
+              >
+                <FaPhoneAlt className="text-yellow-300" />
+                <span>+2348033353059</span>
+              </a>
+
+              <a
+                href="mailto:Springfieldshools12@gmail.com"
+                className="flex items-center gap-3 break-all hover:text-yellow-300 transition"
+              >
+                <FaEnvelope className="text-yellow-300 shrink-0" />
+                <span>Springfieldshools12@gmail.com</span>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-extrabold uppercase tracking-[0.2em] text-yellow-300">
+              Connect With Us
+            </h4>
+
+            <div className="mt-5 flex items-center gap-4">
+              <a
+                href="https://www.facebook.com/share/16xwff6eJo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="h-11 w-11 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white hover:bg-yellow-400 hover:text-blue-950 transition"
+              >
+                <FaFacebookF className="text-lg" />
+              </a>
+
+              <a
+                href="https://wa.me/2348033353059"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="h-11 w-11 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white hover:bg-yellow-400 hover:text-blue-950 transition"
+              >
+                <FaWhatsapp className="text-xl" />
+              </a>
+
+              <a
+                href="mailto:Springfieldshools12@gmail.com"
+                aria-label="Email"
+                className="h-11 w-11 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white hover:bg-yellow-400 hover:text-blue-950 transition"
+              >
+                <FaEnvelope className="text-lg" />
+              </a>
+            </div>
+
+            <div className="mt-6">
+              <a
+                href="https://wa.me/2348033353059?text=Hello%20Springfield%20Golden%20Tulip%20Academy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-yellow-400 text-blue-950 font-semibold hover:bg-yellow-300 transition shadow-md"
+              >
+                <FaWhatsapp />
+                <span>Chat on WhatsApp</span>
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-8 border-t border-gray-600 pt-4 text-center">
-          <p className="text-sm">
-            &copy; {new Date().getFullYear()} B10 Eatery - CAC NO:
-            7708208. All rights reserved.
+        <div className="mt-12 border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-sm text-white/70 text-center md:text-left">
+            © {new Date().getFullYear()} Springfield Golden Tulip Academy. All
+            rights reserved.
           </p>
-          <p className="text-xs italic text-gray-400 mt-2">
-            Web Developer: +2348030611606
+
+          <p className="text-sm text-white/70 text-center md:text-right">
+            Designed with care for excellence.
           </p>
         </div>
       </div>
