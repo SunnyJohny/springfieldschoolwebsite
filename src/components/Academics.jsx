@@ -129,8 +129,8 @@ const admissionsData = {
 
 const AcademicSection = ({
   schoolName = "Springfield Golden Tulip Academy",
-  enquiryPhone = "(+234) 811 1234 098",
-  enquiryEmail = "info@springfieldgoldentulipacademy.com",
+  enquiryPhone = "(+234) 803 335 3059",
+  enquiryEmail = "springfieldshools12@gmail.com",
   onApply = null, // optional function to open your admission form modal/page
 }) => {
   const [activeTab, setActiveTab] = useState("curriculum"); // curriculum | admissions

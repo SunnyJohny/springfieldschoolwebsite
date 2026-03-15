@@ -1,11 +1,10 @@
 import React from "react";
 import "./App.css";
 
-import AboutUs from "./components/AboutUs"; // ✅ make sure this path matches your file name
+import AboutUs from "./components/AboutUs";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
-// import Navbar from "./components/Navbar";
 import WhatsAppIcon from "./components/watsappComponent";
 import NewsSection from "./components/NewsSection";
 
@@ -15,11 +14,13 @@ import GallerySection from "./components/GallerySection";
 // ✅ Academics (Curriculum + Admissions)
 import AcademicSection from "./components/Academics";
 
+// ✅ FAQs
+import Faqs from "./components/Faqs";
+
 function App() {
   return (
     <>
       <div>
-        {/* <Navbar /> */}
         <Hero />
 
         <NewsSection />
@@ -28,11 +29,14 @@ function App() {
 
         <AcademicSection />
 
-        {/* ✅ About Us */}
         <AboutUs />
 
+        <Faqs />
+
         <Contact />
+
         <WhatsAppIcon />
+
         <Footer />
       </div>
     </>
@@ -40,4 +44,3 @@ function App() {
 }
 
 export default App;
-
