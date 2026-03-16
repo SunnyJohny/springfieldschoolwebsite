@@ -31,6 +31,8 @@ import { db, storage } from "../firebase";
 import { useMyContext } from "../Context/MyContext";
 
 const SCHOOL_ID = "main";
+const INITIAL_VISIBLE_COUNT = 6;
+const LOAD_MORE_COUNT = 6;
 
 const container = {
   hidden: { opacity: 0, y: 24 },
@@ -119,6 +121,7 @@ const GallerySection = ({ title, subtitle }) => {
   // ✅ filter / lightbox
   const [activeCat, setActiveCat] = useState("All");
   const [activeIndex, setActiveIndex] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
 
   // ✅ admin upload modal
   const [addOpen, setAddOpen] = useState(false);
@@ -149,17 +152,36 @@ const GallerySection = ({ title, subtitle }) => {
     return items.filter((x) => x.category === activeCat);
   }, [items, activeCat]);
 
+  const visibleItems = useMemo(() => {
+    return filtered.slice(0, visibleCount);
+  }, [filtered, visibleCount]);
+
+  const hasMore = filtered.length > visibleCount;
+  const canShowLess = visibleCount > INITIAL_VISIBLE_COUNT;
+
+  useEffect(() => {
+    setVisibleCount(INITIAL_VISIBLE_COUNT);
+  }, [activeCat, items.length]);
+
   const openModal = (index) => setActiveIndex(index);
   const closeModal = () => setActiveIndex(null);
 
   const goPrev = () => {
-    if (activeIndex === null) return;
+    if (activeIndex === null || filtered.length === 0) return;
     setActiveIndex((prev) => (prev - 1 + filtered.length) % filtered.length);
   };
 
   const goNext = () => {
-    if (activeIndex === null) return;
+    if (activeIndex === null || filtered.length === 0) return;
     setActiveIndex((prev) => (prev + 1) % filtered.length);
+  };
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + LOAD_MORE_COUNT, filtered.length));
+  };
+
+  const handleShowLess = () => {
+    setVisibleCount(INITIAL_VISIBLE_COUNT);
   };
 
   // Keyboard navigation for lightbox modal
@@ -444,16 +466,20 @@ const GallerySection = ({ title, subtitle }) => {
           variants={container}
           initial="hidden"
           animate={gridAnimateState}
-          className="grid gap-4 sm:gap-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+          className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {filtered.map((img, idx) => (
+          {visibleItems.map((img, idx) => (
             <motion.article
               key={img.id || `${img.src}-${idx}`}
               variants={itemVar}
               className="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-xl transition-shadow duration-500 flex flex-col"
             >
               {/* Image opens lightbox */}
-              <button type="button" onClick={() => openModal(idx)} className="relative block w-full">
+              <button
+                type="button"
+                onClick={() => openModal(idx)}
+                className="relative block w-full"
+              >
                 <img
                   src={img.src}
                   alt={img.alt || "School photo"}
@@ -519,6 +545,31 @@ const GallerySection = ({ title, subtitle }) => {
             </motion.article>
           ))}
         </motion.div>
+
+        {/* ✅ More / Show Less buttons */}
+        {!galleryLoading && !galleryError && filtered.length > INITIAL_VISIBLE_COUNT && (
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            {hasMore && (
+              <button
+                type="button"
+                onClick={handleLoadMore}
+                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-blue-900 text-white text-sm md:text-base font-semibold hover:bg-blue-800 transition shadow-sm"
+              >
+                More
+              </button>
+            )}
+
+            {canShowLess && (
+              <button
+                type="button"
+                onClick={handleShowLess}
+                className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-blue-900 text-blue-900 bg-white text-sm md:text-base font-semibold hover:bg-blue-50 transition shadow-sm"
+              >
+                Show Less
+              </button>
+            )}
+          </div>
+        )}
 
         {/* Empty state */}
         {!galleryLoading && !galleryError && filtered.length === 0 && (

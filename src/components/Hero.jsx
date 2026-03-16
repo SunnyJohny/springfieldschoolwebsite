@@ -40,8 +40,6 @@ const fallbackSlides = [
   },
 ];
 
-const WHATSAPP_NUMBER = "2348033353059";
-
 const Hero = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
@@ -58,8 +56,7 @@ const Hero = () => {
 
   const closeAuth = () => setAuthOpen(false);
 
-  const { gallery, news, newsLoading, newsError, currentUser, isAdmin } =
-    useMyContext();
+  const { gallery, news, newsLoading, newsError, currentUser } = useMyContext();
 
   useEffect(() => {
     const onScroll = () => setIsSticky(window.scrollY > 10);
@@ -129,32 +126,6 @@ const Hero = () => {
     );
   }, [currentUser]);
 
-  const whatsappApplyLink = useMemo(() => {
-    const message = [
-      "Hello Springfield Golden Tulip Academy,",
-      "",
-      "I am a parent/guardian and I would like to apply for admission for my child/ward.",
-      "",
-      "Please kindly share the admission requirements, available classes, school fees, application process, and any other important information I need to begin.",
-      "",
-      "Child/Ward Name:",
-      "Class of Interest:",
-      "Parent/Guardian Name:",
-      "Phone Number:",
-      "Preferred Campus/Location (if applicable):",
-      "",
-      "Thank you.",
-    ].join("\n");
-
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-  }, []);
-
-  const handleApplyRedirect = () => {
-    closeMobile();
-    closeAuth();
-    window.open(whatsappApplyLink, "_blank", "noopener,noreferrer");
-  };
-
   const handleLogout = async () => {
     try {
       setLoggingOut(true);
@@ -197,45 +168,43 @@ const Hero = () => {
               <span>springfieldshools12@gmail.com</span>
             </div>
 
-            {isAdmin && (
-              <div className="flex flex-wrap items-center justify-center gap-2">
-                {currentUser ? (
-                  <>
-                    <span className="inline-flex items-center gap-2 bg-white/15 border border-white/20 text-white px-3 py-1 rounded-full text-[11px] md:text-xs font-semibold">
-                      <span className="h-2 w-2 rounded-full bg-green-400 inline-block" />
-                      Logged in
-                    </span>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {currentUser ? (
+                <>
+                  <span className="inline-flex items-center gap-2 bg-white/15 border border-white/20 text-white px-3 py-1 rounded-full text-[11px] md:text-xs font-semibold">
+                    <span className="h-2 w-2 rounded-full bg-green-400 inline-block" />
+                    Logged in
+                  </span>
 
-                    <span className="bg-white/10 px-3 py-1 rounded-full text-[11px] md:text-xs font-medium max-w-[220px] truncate">
-                      {loggedInName}
-                    </span>
+                  <span className="bg-white/10 px-3 py-1 rounded-full text-[11px] md:text-xs font-medium max-w-[220px] truncate">
+                    {loggedInName}
+                  </span>
 
-                    <button
-                      onClick={handleLogout}
-                      disabled={loggingOut}
-                      className="bg-red-500 text-white text-xs font-semibold tracking-wide px-4 py-1 rounded-sm uppercase hover:bg-red-600 transition disabled:opacity-70"
-                      type="button"
-                    >
-                      {loggingOut ? "Logging out..." : "Logout"}
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <span className="bg-white/10 px-3 py-1 rounded-full text-[11px] md:text-xs font-medium">
-                      Not logged in
-                    </span>
+                  <button
+                    onClick={handleLogout}
+                    disabled={loggingOut}
+                    className="bg-red-500 text-white text-xs font-semibold tracking-wide px-4 py-1 rounded-sm uppercase hover:bg-red-600 transition disabled:opacity-70"
+                    type="button"
+                  >
+                    {loggingOut ? "Logging out..." : "Logout"}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <span className="bg-white/10 px-3 py-1 rounded-full text-[11px] md:text-xs font-medium">
+                    Not logged in
+                  </span>
 
-                    <button
-                      onClick={() => openAuth("signin")}
-                      className="bg-yellow-400 text-blue-900 text-xs font-semibold tracking-wide px-4 py-1 rounded-sm uppercase hover:bg-yellow-300 transition"
-                      type="button"
-                    >
-                      Apply / Login
-                    </button>
-                  </>
-                )}
-              </div>
-            )}
+                  <button
+                    onClick={() => openAuth("signin")}
+                    className="bg-yellow-400 text-blue-900 text-xs font-semibold tracking-wide px-4 py-1 rounded-sm uppercase hover:bg-yellow-300 transition"
+                    type="button"
+                  >
+                    Apply / Login
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
 
@@ -274,32 +243,28 @@ const Hero = () => {
             </nav>
 
             <div className="hidden md:flex items-center gap-3">
-              {isAdmin && (
+              {currentUser ? (
                 <>
-                  {currentUser ? (
-                    <>
-                      <span className="text-xs font-semibold text-green-600 bg-green-50 border border-green-200 px-3 py-2 rounded-full">
-                        Signed in
-                      </span>
-                      <button
-                        onClick={handleLogout}
-                        disabled={loggingOut}
-                        className="text-sm font-semibold text-red-600 hover:text-red-700 transition disabled:opacity-70"
-                        type="button"
-                      >
-                        {loggingOut ? "Logging out..." : "Logout"}
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      onClick={() => openAuth("signin")}
-                      className="text-sm font-semibold text-blue-900 hover:text-yellow-500 transition"
-                      type="button"
-                    >
-                      Sign in
-                    </button>
-                  )}
+                  <span className="text-xs font-semibold text-green-600 bg-green-50 border border-green-200 px-3 py-2 rounded-full">
+                    Signed in
+                  </span>
+                  <button
+                    onClick={handleLogout}
+                    disabled={loggingOut}
+                    className="text-sm font-semibold text-red-600 hover:text-red-700 transition disabled:opacity-70"
+                    type="button"
+                  >
+                    {loggingOut ? "Logging out..." : "Logout"}
+                  </button>
                 </>
+              ) : (
+                <button
+                  onClick={() => openAuth("signin")}
+                  className="text-sm font-semibold text-blue-900 hover:text-yellow-500 transition"
+                  type="button"
+                >
+                  Sign in
+                </button>
               )}
             </div>
 
@@ -331,44 +296,40 @@ const Hero = () => {
                   </ScrollLink>
                 ))}
 
-                {isAdmin && (
-                  <>
-                    <div className="mt-3 mb-2">
-                      {currentUser ? (
-                        <div className="flex items-center gap-2 text-xs text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
-                          <span className="h-2 w-2 rounded-full bg-green-500 inline-block" />
-                          <span className="font-semibold">Logged in:</span>
-                          <span className="truncate">{loggedInName}</span>
-                        </div>
-                      ) : (
-                        <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2">
-                          Not logged in
-                        </div>
-                      )}
+                <div className="mt-3 mb-2">
+                  {currentUser ? (
+                    <div className="flex items-center gap-2 text-xs text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
+                      <span className="h-2 w-2 rounded-full bg-green-500 inline-block" />
+                      <span className="font-semibold">Logged in:</span>
+                      <span className="truncate">{loggedInName}</span>
                     </div>
+                  ) : (
+                    <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2">
+                      Not logged in
+                    </div>
+                  )}
+                </div>
 
-                    {currentUser ? (
-                      <button
-                        onClick={handleLogout}
-                        disabled={loggingOut}
-                        className="mt-2 w-full bg-red-500 text-white py-2 rounded text-xs font-semibold uppercase hover:bg-red-600 transition disabled:opacity-70"
-                        type="button"
-                      >
-                        {loggingOut ? "Logging out..." : "Logout"}
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          openAuth("signin");
-                          closeMobile();
-                        }}
-                        className="mt-2 w-full bg-yellow-400 text-blue-900 py-2 rounded text-xs font-semibold uppercase hover:bg-yellow-300 transition"
-                        type="button"
-                      >
-                        Apply / Login
-                      </button>
-                    )}
-                  </>
+                {currentUser ? (
+                  <button
+                    onClick={handleLogout}
+                    disabled={loggingOut}
+                    className="mt-2 w-full bg-red-500 text-white py-2 rounded text-xs font-semibold uppercase hover:bg-red-600 transition disabled:opacity-70"
+                    type="button"
+                  >
+                    {loggingOut ? "Logging out..." : "Logout"}
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      openAuth("signin");
+                      closeMobile();
+                    }}
+                    className="mt-2 w-full bg-yellow-400 text-blue-900 py-2 rounded text-xs font-semibold uppercase hover:bg-yellow-300 transition"
+                    type="button"
+                  >
+                    Apply / Login
+                  </button>
                 )}
               </nav>
             </div>
@@ -424,18 +385,22 @@ const Hero = () => {
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
-              <button
-                onClick={handleApplyRedirect}
-                className="px-6 py-3 bg-yellow-400 text-blue-900 font-semibold rounded-full hover:bg-yellow-300 transition shadow-lg"
-                type="button"
+              <ScrollLink
+                to="admissions"
+                spy={true}
+                smooth={true}
+                offset={-120}
+                duration={500}
+                className="cursor-pointer"
               >
-                Apply Now
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute left-0 right-0 bottom-0 z-20">
+                <button
+                  className="px-6 py-3 bg-yellow-400 text-blue-900 font-semibold rounded-full hover:bg-yellow-300 transition shadow-lg"
+                  type="button"
+                >
+                  Apply
+                </button>
+              </ScrollLink>
+              <div className="absolute left-0 right-0 bottom-0 z-20">
           <div className="max-w-6xl mx-auto px-4 pb-8 md:pb-10">
             <div className="bg-white/90 backdrop-blur rounded-xl border border-white/60 shadow-lg overflow-hidden">
               <div className="flex items-center gap-3 px-4 py-3">
@@ -480,6 +445,11 @@ const Hero = () => {
             </div>
           </div>
         </div>
+            </div>
+          </div>
+        </div>
+
+        
       </section>
 
       <AuthModal

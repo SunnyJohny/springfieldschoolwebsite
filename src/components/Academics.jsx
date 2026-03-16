@@ -9,6 +9,8 @@ import {
   BsCalendar2Check,
   BsPatchQuestion,
   BsCheck2Circle,
+  BsLightbulb,
+  BsPalette,
 } from "react-icons/bs";
 
 const container = {
@@ -41,30 +43,30 @@ const curriculumData = [
     title: "Early Years (Creche & Nursery)",
     icon: <BsMortarboard />,
     points: [
-      "Phonics, early numeracy & handwriting foundations",
-      "Creative play, music, storytelling & fine motor skills",
-      "Moral instruction, courtesy & self-confidence building",
-      "Learning through activities and guided discovery",
+      "Phonics, sound recognition, early numeracy and handwriting readiness",
+      "Creative play, storytelling, music, colour work and fine motor development",
+      "Confidence building, courtesy, routines and strong social interaction",
+      "Learning through guided discovery, activity-based teaching and care",
     ],
   },
   {
     title: "Primary School",
     icon: <BsBook />,
     points: [
-      "English, Mathematics, Basic Science & Technology",
-      "Social Studies, Civic Education & Moral Instruction",
-      "ICT/Computer studies and practical learning",
-      "Continuous assessment + termly examinations",
+      "Strong grounding in English, Mathematics, Science and other core subjects",
+      "Moral instruction, social development, civic awareness and discipline",
+      "Practical classroom learning with ICT exposure and continuous assessment",
+      "Preparation for academic excellence, confidence and future leadership",
     ],
   },
   {
-    title: "Junior Secondary",
-    icon: <BsBook />,
+    title: "Co-Curricular & Enrichment",
+    icon: <BsPalette />,
     points: [
-      "Strong core subjects with inquiry-based learning",
-      "STEM projects, coding basics & science practicals",
-      "Leadership, teamwork and communication skills",
-      "Preparation for external assessments (as applicable)",
+      "Creative arts, music, reading culture and confidence-building activities",
+      "Clubs, projects, presentations and teamwork-based learning experiences",
+      "Sports, recreation and healthy participation beyond the classroom",
+      "Balanced development that supports talent discovery and character formation",
     ],
   },
 ];
@@ -131,9 +133,9 @@ const AcademicSection = ({
   schoolName = "Springfield Golden Tulip Academy",
   enquiryPhone = "(+234) 803 335 3059",
   enquiryEmail = "springfieldshools12@gmail.com",
-  onApply = null, // optional function to open your admission form modal/page
+  onApply = null,
 }) => {
-  const [activeTab, setActiveTab] = useState("curriculum"); // curriculum | admissions
+  const [activeTab, setActiveTab] = useState("curriculum");
 
   const tabs = useMemo(
     () => [
@@ -227,7 +229,7 @@ const AcademicSection = ({
                           {block.title}
                         </h3>
                         <p className="text-sm text-slate-600 mt-1">
-                          Core focus areas for this level.
+                          Core focus areas for this section.
                         </p>
                       </div>
                     </div>
@@ -249,7 +251,7 @@ const AcademicSection = ({
                 </motion.div>
               ))}
 
-              {/* Curriculum highlight card (PARAPHRASED CONTENT ADDED) */}
+              {/* Curriculum highlight card */}
               <motion.div
                 variants={itemVar}
                 initial="hidden"
@@ -259,36 +261,34 @@ const AcademicSection = ({
               >
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
                   <div className="max-w-3xl">
-                    <h3 className="text-xl md:text-2xl font-extrabold text-blue-900">
-                      The Ethos of Teaching and Learning
-                    </h3>
+                    <div className="flex items-center gap-3">
+                      <div className="w-11 h-11 rounded-xl bg-yellow-50 text-yellow-700 flex items-center justify-center text-xl border border-yellow-100">
+                        <BsLightbulb />
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-extrabold text-blue-900">
+                        The Ethos of Teaching and Learning
+                      </h3>
+                    </div>
 
-                    <p className="mt-2 text-sm md:text-base text-slate-600 leading-relaxed">
-                      Our curriculum is designed around the needs of every learner and the
-                      future they are being prepared for. We blend the American (Abeka) and
-                      Nigerian curricula into a modern, challenging programme that helps
-                      pupils stay adaptable, flexible, and globally aware.
+                    <p className="mt-4 text-sm md:text-base text-slate-600 leading-relaxed">
+                      Our curriculum is designed to develop the whole child through
+                      quality teaching, structured learning, creativity, and strong
+                      moral values. We focus on helping every learner grow in
+                      knowledge, confidence, discipline, and character.
                     </p>
 
                     <p className="mt-3 text-sm md:text-base text-slate-600 leading-relaxed">
-                      This curriculum is dynamic — it equips learners to shape their own
-                      future and respond confidently to the changing demands of society.
-                      We focus on the total development of the child: cognitive growth,
-                      emotional well-being, and practical (psychomotor) skills.
+                      At {schoolName}, children are guided with age-appropriate
+                      methods that make learning engaging, practical, and meaningful.
+                      We combine strong academic foundations with activities that
+                      support communication, curiosity, collaboration, and healthy
+                      self-expression.
                     </p>
 
                     <p className="mt-3 text-sm md:text-base text-slate-600 leading-relaxed">
-                      We encourage broad, balanced, and in-depth learning that supports
-                      creativity and innovation. Pupils are actively involved in learning,
-                      while educators apply continuous assessment and structured evaluation
-                      using data and clear timelines. Learners also build responsibility
-                      through self-assessment and peer review — with a strong focus on
-                      standards and outcomes.
-                    </p>
-
-                    <p className="mt-3 text-sm md:text-base text-slate-600 leading-relaxed">
-                      Teachers provide meaningful feedback and refine their strategies based
-                      on assessment results, learner progress, and self-esteem development.
+                      We also believe that continuous assessment, teacher feedback,
+                      and active participation help pupils learn better and gain the
+                      confidence to succeed both inside and outside the classroom.
                     </p>
 
                     <div className="mt-6">
@@ -296,16 +296,17 @@ const AcademicSection = ({
                         Interaction-Based Learning
                       </h4>
                       <p className="mt-2 text-sm md:text-base text-slate-600 leading-relaxed">
-                        We promote active classroom interaction — discussion, hands-on tasks,
-                        guided projects, and collaborative learning — so pupils don’t just
-                        memorize content, but understand it and apply it.
+                        We promote discussion, guided tasks, hands-on classroom
+                        activities, reading culture, and collaborative experiences so
+                        children do not only memorize lessons, but truly understand
+                        and apply what they learn.
                       </p>
                     </div>
                   </div>
 
                   <div className="flex gap-3 flex-wrap lg:justify-end">
                     <span className="px-4 py-2 rounded-full text-xs md:text-sm font-semibold bg-blue-50 text-blue-900 border border-blue-100">
-                      American (Abeka) + Nigerian
+                      Strong Academic Foundation
                     </span>
                     <span className="px-4 py-2 rounded-full text-xs md:text-sm font-semibold bg-yellow-50 text-yellow-800 border border-yellow-100">
                       Continuous Assessment
@@ -314,7 +315,7 @@ const AcademicSection = ({
                       Whole-Child Development
                     </span>
                     <span className="px-4 py-2 rounded-full text-xs md:text-sm font-semibold bg-slate-50 text-slate-700 border border-slate-200">
-                      Feedback & Evaluation
+                      Character & Confidence
                     </span>
                   </div>
                 </div>

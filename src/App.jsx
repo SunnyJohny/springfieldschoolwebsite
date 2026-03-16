@@ -23,9 +23,10 @@ function App() {
       <div>
         <Hero />
 
-        <NewsSection />
 
         <GallerySection />
+        <NewsSection />
+
 
         <AcademicSection />
 
